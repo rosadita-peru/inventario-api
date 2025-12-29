@@ -1,0 +1,84 @@
+﻿using invetario_api.Modules.unit.dto;
+using invetario_api.utils;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
+namespace invetario_api.Modules.unit
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UnitController : ControllerBase
+    {
+        private IUnitService _unitService;
+
+        public UnitController(IUnitService unitService)
+        {
+            _unitService = unitService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FindAll()
+        {
+            var result = await _unitService.getUnits();
+            return Ok(result);
+        }
+
+
+        [HttpGet("{unitId:int}")]
+        public async Task<IActionResult> FindById(int unitId)
+        {
+            var result = await _unitService.getUnitById(unitId);
+
+            if(result == null)
+            {
+                return BadRequest(ResponseApi<object>.NotFound(404, "Unit Not Found"));
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] UnitDto unitDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _unitService.createUnit(unitDto);
+            return Ok(result);
+        }
+
+        [HttpPut("{unitId:int}")]
+        public async Task<IActionResult> Update(int unitId, [FromBody] UpdateUnitDto unitDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _unitService.updateUnit(unitId, unitDto);
+
+            if(result == null)
+            {
+                return BadRequest(ResponseApi<object>.NotFound(404, "Unit Not Found"));
+            }
+
+            return Ok(result);
+        }
+
+
+        [HttpDelete("{unitId:int}")]
+        public async Task<IActionResult> Delete(int unitId)
+        {
+            var result = await _unitService.deleteUnit(unitId);
+
+            if(result == null)
+            {
+                return BadRequest(ResponseApi<object>.NotFound(404, "Unit Not Found"));
+            }
+
+            return Ok(result);
+        }
+    }
+}
