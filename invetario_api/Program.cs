@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using invetario_api.Modules.auth;
 using invetario_api.Modules.users;
 using invetario_api.Modules.store;
+using invetario_api.Modules.products;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -36,8 +37,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IUnitService, UnitService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
-
 builder.Services.AddScoped<IStoreService, StoreService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.Configure<ApiBehaviorOptions>(opt =>
 {
@@ -85,7 +86,7 @@ builder.Services.AddAuthentication(
     {
         OnChallenge = async context =>
         {
-            context.HandleResponse(); 
+            context.HandleResponse();
             context.Response.StatusCode = 401;
             context.Response.ContentType = "application/json";
 
