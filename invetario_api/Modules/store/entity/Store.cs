@@ -42,5 +42,7 @@ namespace invetario_api.Modules.store.entity
         public DateTime createdAt { get; set; } = DateTime.Now;
 
         public string observations { get; set; }
+
+        public ICollection<ProductStore> productStores { get; set; } = new List<ProductStore>();
     }
 }

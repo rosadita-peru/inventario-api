@@ -47,6 +47,6 @@ namespace invetario_api.Modules.products.entity
 
         public bool status { get; set; } = false;
 
-
+        public ICollection<ProductStore> productStores { get; set; } = new List<ProductStore>();
     }
 }

@@ -20,7 +20,9 @@ namespace invetario_api.database
 
         public DbSet<Store> stores { get; set; }
 
-public Database(DbContextOptions<Database> options): base(options) { }
+        public DbSet<ProductStore> productStores { get; set; }
+
+        public Database(DbContextOptions<Database> options): base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
