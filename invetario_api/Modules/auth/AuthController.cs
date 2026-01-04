@@ -30,10 +30,7 @@ namespace invetario_api.Modules.auth
 
 
             var loginResponse = await _authService.login(loginDto);
-            if (loginResponse == null)
-            {
-                return Unauthorized(ResponseApi<object>.NotFound(401, "Email or password"));
-            }
+
             return Ok(loginResponse);
         }
     }

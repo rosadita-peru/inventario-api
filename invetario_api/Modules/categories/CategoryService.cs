@@ -1,4 +1,5 @@
 ﻿using invetario_api.database;
+using invetario_api.Exceptions;
 using invetario_api.Modules.categories.dto;
 using invetario_api.Modules.categories.entity;
 using invetario_api.utils;
@@ -42,7 +43,7 @@ namespace invetario_api.Modules.categories
             var category = await _db.categories.FindAsync(categoryId);
 
             if (category == null) {
-                return null;
+                throw new HttpException(404, "Category not found");
             }
 
             category.status = false;
@@ -58,7 +59,7 @@ namespace invetario_api.Modules.categories
 
             if (findCategory == null)
             {
-                return null;
+                throw new HttpException(404, "Category not found");
             }
 
             return findCategory;
@@ -70,7 +71,7 @@ namespace invetario_api.Modules.categories
 
             if (findCategory == null)
             {
-                return null;
+                throw new HttpException(404, "Category not found");
             }
 
             findCategory.name = data.name;

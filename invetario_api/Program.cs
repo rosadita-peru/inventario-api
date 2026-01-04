@@ -18,6 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(opt =>
 {
+    opt.Filters.Add<GlobalExceptionFilter>();
     opt.Filters.Add<ApiFilter>();
 });
 

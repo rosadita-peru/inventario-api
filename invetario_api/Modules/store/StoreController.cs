@@ -32,10 +32,6 @@ namespace invetario_api.Modules.store
         public async Task<IActionResult> FindById(int storeId) 
         {
             var result = await _storeService.getStoreById(storeId);
-            if(result == null)
-            {
-                return BadRequest(ResponseApi<object>.NotFound(404, "Store Not Found"));
-            }
 
             return Ok(result);
         }
@@ -48,10 +44,6 @@ namespace invetario_api.Modules.store
                 return BadRequest(ModelState);
             }
             var result = await _storeService.createStore(data);
-            if(result == null)
-            {
-                return BadRequest(ResponseApi<object>.NotFound(404, "User Not Found"));
-            }
             return Ok(result);
         }
 
@@ -64,12 +56,6 @@ namespace invetario_api.Modules.store
             }
 
             var result = await _storeService.updateStore(storeId, data);
-
-            if(result == null)
-            {
-                return BadRequest(ResponseApi<object>.NotFound(404, "Store or User Not Found"));
-            }
-
             return Ok(result);
         }
 
@@ -79,10 +65,6 @@ namespace invetario_api.Modules.store
         public async Task<IActionResult> delete(int storeId)
         {
             var result = await _storeService.deleteStore(storeId);
-            if (result == null)
-            {
-                return BadRequest(ResponseApi<object>.NotFound(404, "Store Not Found"));
-            }
             return Ok(result);
         }
     }

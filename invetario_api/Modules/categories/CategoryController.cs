@@ -33,13 +33,7 @@ namespace invetario_api.Modules.categories
         [Authorize]
         public async Task<IActionResult> FindById(int categoryId) {
 
-            var result = await _categoryService.getCategoryById(categoryId);
-
-            if(result == null)
-            {
-                return BadRequest(ResponseApi<object>.NotFound(404, "Category Not Found"));
-            }
-
+            var result = await _categoryService.getCategoryById(categoryId)
             return Ok(result);
         }
 
@@ -53,7 +47,6 @@ namespace invetario_api.Modules.categories
 
 
             var result = await _categoryService.createCategory(data);
-
             return Ok(result);
         }
 
@@ -67,12 +60,6 @@ namespace invetario_api.Modules.categories
             }
 
             var result = await _categoryService.updateCategory(categoryId, data);
-
-            if (result == null)
-            {
-                return BadRequest(ResponseApi<object>.NotFound(404, "Category Not Found"));
-            }
-
             return Ok(result);
         }
 
@@ -82,12 +69,6 @@ namespace invetario_api.Modules.categories
         public async Task<IActionResult> delete(int categoryId)
         {
             var result = await _categoryService.deleteCategory(categoryId);
-
-            if (result == null)
-            {
-                return BadRequest(ResponseApi<object>.NotFound(404, "Category Not Found"));
-            }
-
             return Ok(result);
         }
     }

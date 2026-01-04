@@ -1,5 +1,6 @@
 ﻿using BCrypt.Net;
 using invetario_api.database;
+using invetario_api.Exceptions;
 using invetario_api.Jwt;
 using invetario_api.Modules.users.dto;
 using invetario_api.Modules.users.entity;
@@ -22,7 +23,7 @@ namespace invetario_api.Modules.users
 
             if (findEmail != null)
             {
-                return null;
+                throw new HttpException(409, "Email already Exists");
             }
 
             var hashPassword = BCrypt.Net.BCrypt.HashPassword(userDto.password);

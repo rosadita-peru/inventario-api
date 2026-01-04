@@ -1,4 +1,5 @@
 using invetario_api.database;
+using invetario_api.Exceptions;
 using invetario_api.Modules.store.dto;
 using invetario_api.Modules.store.entity;
 using invetario_api.Modules.store.response;
@@ -32,7 +33,7 @@ namespace invetario_api.Modules.store
 
             if(findUser == null)
             {
-                return null;
+                throw new HttpException(404, "User not found");
             }
 
             var newStore = new Store
@@ -75,7 +76,7 @@ namespace invetario_api.Modules.store
             var store = await _db.stores.FindAsync(storeId);
             if (store == null)
             {
-                return null;
+                throw new HttpException(404, "Store not found");
             }
 
             return StoreResponse.fromEntity(store);
@@ -86,7 +87,7 @@ namespace invetario_api.Modules.store
             var store = await _db.stores.FindAsync(storeId);
             if (store == null)
             {
-                return null;
+                throw new HttpException(404, "Store not found");
             }
 
             var findUser = await _db.users
@@ -95,7 +96,7 @@ namespace invetario_api.Modules.store
 
             if(findUser == null)
             {
-                return null;
+                throw new HttpException(404, "User not found");
             }
 
 

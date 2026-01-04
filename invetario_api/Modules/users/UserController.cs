@@ -36,12 +36,6 @@ namespace invetario_api.Modules.users
 
 
             var newUser = await _userService.createUser(userDto);
-
-            if(newUser == null)
-            {
-                return BadRequest(ResponseApi<object>.NotFound(409, "Email is incorrent"));
-            }
-
             return Ok(newUser);
         }
 

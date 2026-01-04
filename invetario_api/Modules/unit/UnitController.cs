@@ -32,11 +32,6 @@ namespace invetario_api.Modules.unit
         {
             var result = await _unitService.getUnitById(unitId);
 
-            if(result == null)
-            {
-                return BadRequest(ResponseApi<object>.NotFound(404, "Unit Not Found"));
-            }
-
             return Ok(result);
         }
 
@@ -64,11 +59,6 @@ namespace invetario_api.Modules.unit
 
             var result = await _unitService.updateUnit(unitId, unitDto);
 
-            if(result == null)
-            {
-                return BadRequest(ResponseApi<object>.NotFound(404, "Unit Not Found"));
-            }
-
             return Ok(result);
         }
 
@@ -78,11 +68,6 @@ namespace invetario_api.Modules.unit
         public async Task<IActionResult> Delete(int unitId)
         {
             var result = await _unitService.deleteUnit(unitId);
-
-            if(result == null)
-            {
-                return BadRequest(ResponseApi<object>.NotFound(404, "Unit Not Found"));
-            }
 
             return Ok(result);
         }

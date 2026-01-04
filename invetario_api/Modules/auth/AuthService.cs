@@ -1,4 +1,5 @@
 using invetario_api.database;
+using invetario_api.Exceptions;
 using invetario_api.Jwt;
 using invetario_api.Modules.auth.dto;
 using invetario_api.Modules.auth.response;
@@ -25,11 +26,17 @@ namespace invetario_api.Modules.auth
                 .Where(u => u.email == loginDto.email)
                 .FirstOrDefaultAsync();
 
-            if (findUser == null) return null;
+            if (findUser == null)
+            {
+                throw new HttpException(401, "Invalid email or password");
+            }
             
             var isPasswordValid = BCrypt.Net.BCrypt.Verify(loginDto.password, findUser.password);
 
-            if(!isPasswordValid) return null;
+            if(!isPasswordValid)
+            {
+                throw new HttpException(401, "Invalid email or password");
+            }
 
 
             var token = _jwt.generateJwt(findUser);

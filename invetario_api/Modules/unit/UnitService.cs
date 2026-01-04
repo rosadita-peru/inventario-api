@@ -1,4 +1,5 @@
 ﻿using invetario_api.database;
+using invetario_api.Exceptions;
 using invetario_api.Modules.unit.dto;
 using invetario_api.Modules.unit.entity;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,7 @@ namespace invetario_api.Modules.unit
             var findUnit = await _db.units.FindAsync(unitId);
 
             if (findUnit == null) {
-                return null;
+                throw new HttpException(404, "Unit not found");
             }
 
             findUnit.status = false;
@@ -47,7 +48,7 @@ namespace invetario_api.Modules.unit
 
             if (findUnit == null)
             {
-                return null;
+                throw new HttpException(404, "Unit not found");
             }
 
             return findUnit;
@@ -66,7 +67,7 @@ namespace invetario_api.Modules.unit
 
             if (findUnit == null)
             {
-                return null;
+                throw new HttpException(404, "Unit not found");
             }
 
             findUnit.name = unitDto.name;
