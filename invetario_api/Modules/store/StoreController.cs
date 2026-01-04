@@ -15,24 +15,57 @@ namespace invetario_api.Modules.store
     {
         private IStoreService _storeService;
 
-        public StoreController(IStoreService storeService) {
+        public StoreController(IStoreService storeService)
+        {
             _storeService = storeService;
         }
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> FindAll() 
+        public async Task<IActionResult> FindAll()
         {
             var result = await _storeService.getStores();
             return Ok(result);
         }
-        
+
         [HttpGet("{storeId:int}")]
         [Authorize(Roles = "ADMIN")]
-        public async Task<IActionResult> FindById(int storeId) 
+        public async Task<IActionResult> FindById(int storeId)
         {
             var result = await _storeService.getStoreById(storeId);
 
+            return Ok(result);
+        }
+
+        [HttpGet("{storeId:int}/products")]
+        [Authorize(Roles = "ADMIN, STORE")]
+        public async Task<IActionResult> GetProductsByStore(int storeId)
+        {
+            var result = await _storeService.getProductsByStore(storeId);
+            return Ok(result);
+        }
+
+        [HttpPost("{storeId:int}/products")]
+        [Authorize(Roles = "ADMIN, STORE")]
+        public async Task<IActionResult> AddProductToStore(int storeId, [FromBody] StoreProductDto data)
+        {
+            var result = await _storeService.addProductToStore(storeId, data);
+            return Ok(result);
+        }
+
+        [HttpPut("{storeId:int}/products/{productStoreId:int}")]
+        [Authorize(Roles = "ADMIN, STORE")]
+        public async Task<IActionResult> UpdateStoreProduct(int storeId, int productStoreId, [FromBody] UpdateStoreProductDto data)
+        {
+            var result = await _storeService.updateStoreProduct(storeId, productStoreId, data);
+            return Ok(result);
+        }
+
+        [HttpDelete("{storeId:int}/products/{productStoreId:int}")]
+        [Authorize(Roles = "ADMIN, STORE")]
+        public async Task<IActionResult> RemoveProductFromStore(int storeId, int productStoreId)
+        {
+            var result = await _storeService.removeProductFromStore(storeId, productStoreId);
             return Ok(result);
         }
 

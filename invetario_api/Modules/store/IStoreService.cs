@@ -12,11 +12,19 @@ namespace invetario_api.Modules.store
         Task<List<StoreResponse>> getStores();
 
         Task<StoreResponse?> getStoreById(int storeId);
-        
+
         Task<StoreResponse?> createStore(StoreDto data);
 
         Task<StoreResponse?> updateStore(int storeId, UpdateStoreDto data);
 
         Task<StoreResponse?> deleteStore(int storeId);
+
+        Task<StoreProductResponse?> addProductToStore(int storeId, StoreProductDto data);
+
+        Task<StoreProductResponse?> updateStoreProduct(int storeId, int productStoreId, UpdateStoreProductDto data);
+
+        Task<StoreProductResponse> removeProductFromStore(int storeId, int productStoreId);
+
+        Task<List<StoreProductResponse>> getProductsByStore(int storeId);
     }
 }
