@@ -17,6 +17,7 @@ using invetario_api.Modules.provider;
 using invetario_api.Modules.client;
 using invetario_api.Modules.entryorder;
 using invetario_api.Modules.images;
+using Microsoft.Extensions.FileProviders;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -141,6 +142,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowAll");
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "static")
+    ),
+    RequestPath = "/static"
+});
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
