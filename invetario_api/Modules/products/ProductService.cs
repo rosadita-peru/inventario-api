@@ -20,9 +20,10 @@ namespace invetario_api.Modules.products
         {
             var categoryId = product.categoryId;
             var unitId = product.unitId;
+            var imageId = product.imageId;
 
             var finCategory = await _db.categories.Where(c => c.categoryId == categoryId).FirstOrDefaultAsync();
-            
+
             if (finCategory == null)
             {
                 throw new HttpException(404, "Category not found");
@@ -32,6 +33,12 @@ namespace invetario_api.Modules.products
             if (findUnit == null)
             {
                 throw new HttpException(404, "Unit not found");
+            }
+
+            var findImage = await _db.images.Where(i => i.imageId == imageId).FirstOrDefaultAsync();
+            if (findImage == null)
+            {
+                throw new HttpException(404, "Image not found");
             }
 
             var newProduct = new Product
@@ -45,6 +52,7 @@ namespace invetario_api.Modules.products
                 priceBuy = product.priceBuy,
                 priceSell = product.priceSell,
                 minStock = product.minStock,
+                imageId = imageId,
                 status = true,
             };
 
@@ -80,7 +88,7 @@ namespace invetario_api.Modules.products
                 .Include(p => p.unit)
                 .Where(p => p.productId == productId)
                 .FirstOrDefaultAsync();
-            if(findProduct == null)
+            if (findProduct == null)
             {
                 throw new HttpException(404, "Product not found");
             }
@@ -93,6 +101,7 @@ namespace invetario_api.Modules.products
             var products = await _db.products
                 .Include(p => p.category)
                 .Include(p => p.unit)
+                .Include(p => p.image)
                 .ToListAsync();
             return ProductResponse.fromEntityList(products);
         }
@@ -102,8 +111,8 @@ namespace invetario_api.Modules.products
             var findProductTask = await _db.products
                 .Where(p => p.productId == productId)
                 .FirstOrDefaultAsync();
-            
-            if(findProductTask == null)
+
+            if (findProductTask == null)
             {
                 throw new HttpException(404, "Product not found");
             }
@@ -111,8 +120,8 @@ namespace invetario_api.Modules.products
             var findCategory = await _db.categories
                 .Where(c => c.categoryId == product.categoryId)
                 .FirstOrDefaultAsync();
-            
-            if(findCategory == null)
+
+            if (findCategory == null)
             {
                 throw new HttpException(404, "Category not found");
             }
@@ -120,12 +129,18 @@ namespace invetario_api.Modules.products
             var findUnit = await _db.units
                 .Where(u => u.unitId == product.unitId)
                 .FirstOrDefaultAsync();
-            
-            if(findUnit == null)
+
+            if (findUnit == null)
             {
                 throw new HttpException(404, "Unit not found");
             }
 
+
+            var findImage = await _db.images.Where(i => i.imageId == product.imageId).FirstOrDefaultAsync();
+            if (findImage == null)
+            {
+                throw new HttpException(404, "Image not found");
+            }
 
             findProductTask.codeInternal = product.codeInternal;
             findProductTask.code = product.code;
@@ -136,6 +151,7 @@ namespace invetario_api.Modules.products
             findProductTask.priceBuy = product.priceBuy;
             findProductTask.priceSell = product.priceSell;
             findProductTask.minStock = product.minStock;
+            findProductTask.imageId = product.imageId;
             if (product.status.HasValue)
             {
                 findProductTask.status = product.status.Value;

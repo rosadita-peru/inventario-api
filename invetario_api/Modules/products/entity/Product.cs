@@ -1,5 +1,6 @@
 ﻿using invetario_api.Modules.categories.entity;
 using invetario_api.Modules.entryorder.entity;
+using invetario_api.Modules.images.entity;
 using invetario_api.Modules.unit.entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -46,6 +47,11 @@ namespace invetario_api.Modules.products.entity
         public int minStock { get; set; }
 
         public bool status { get; set; } = false;
+
+        public int imageId { get; set; }
+
+        [ForeignKey(nameof(imageId))]
+        public Images image { get; set; }
 
         public ICollection<ProductStore> productStores { get; set; } = new List<ProductStore>();
 

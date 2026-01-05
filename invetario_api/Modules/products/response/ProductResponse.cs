@@ -1,5 +1,6 @@
 ﻿
 using invetario_api.Modules.categories.response;
+using invetario_api.Modules.images.response;
 using invetario_api.Modules.products.entity;
 using invetario_api.Modules.unit.response;
 using System.ComponentModel.DataAnnotations;
@@ -21,6 +22,7 @@ namespace invetario_api.Modules.products.response
         public float priceSell { get; set; }
         public int minStock { get; set; }
         public bool status { get; set; }
+        public ImageResponse image { get; set; }
 
         public static ProductResponse fromEntity(entity.Product product)
         {
@@ -36,7 +38,8 @@ namespace invetario_api.Modules.products.response
                 priceBuy = product.priceBuy,
                 priceSell = product.priceSell,
                 minStock = product.minStock,
-                status = product.status
+                status = product.status,
+                image = ImageResponse.FromEntity(product.image)
             };
         }
 

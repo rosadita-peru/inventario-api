@@ -40,5 +40,9 @@ namespace invetario_api.Modules.products.dto
         [Required]
         [Range(1, int.MaxValue)]
         public int minStock { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue)]
+        public int imageId { get; set; }
     }
 }
