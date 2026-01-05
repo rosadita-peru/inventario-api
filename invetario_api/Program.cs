@@ -147,7 +147,7 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(
         Path.Combine(Directory.GetCurrentDirectory(), "static")
     ),
-    RequestPath = "/static"
+    RequestPath = "/api/static"
 });
 
 app.UseHttpsRedirection();

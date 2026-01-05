@@ -6,6 +6,7 @@ public class ImageResponse
 {
     public int imageId { get; set; }
 
+    public string imageName { get; set; }
     public string imageUrl { get; set; }
 
     public DateTime createdAt { get; set; } = DateTime.UtcNow;
@@ -16,7 +17,8 @@ public class ImageResponse
         {
             imageId = image.imageId,
             imageUrl = image.imageUrl,
-            createdAt = image.createdAt
+            createdAt = image.createdAt,
+            imageName = image.imageName
         };
     }
 
