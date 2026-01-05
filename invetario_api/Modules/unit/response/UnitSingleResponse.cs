@@ -16,9 +16,21 @@ namespace invetario_api.Modules.unit.response
             {
                 unitId = unit.unitId,
                 name = unit.name,
-                description =  unit.description,
+                description = unit.description,
                 status = unit.status
             };
+        }
+
+        public static List<UnitSingleResponse> fromEntityList(List<Unit> units)
+        {
+            var responseList = new List<UnitSingleResponse>();
+
+            foreach (var unit in units)
+            {
+                responseList.Add(fromEntity(unit));
+            }
+
+            return responseList;
         }
     }
 }
