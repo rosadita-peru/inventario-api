@@ -56,7 +56,8 @@ namespace invetario_api.Modules.images
                     imageName = nameFile,
                     imageUrl = urlFile
                 };
-
+                await _db.images.AddAsync(newImage);
+                await _db.SaveChangesAsync();
                 return ImageResponse.FromEntity(newImage);
 
             }
