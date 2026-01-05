@@ -37,7 +37,7 @@ namespace invetario_api.Modules.provider
                 email = data.email,
                 mainContact = data.mainContact,
                 contactPhone = data.contactPhone,
-                payCondition = data.payCondition,
+                payCondition = data.payCondition.Value,
                 typeMoney = data.typeMoney,
                 daysDelivery = data.daysDelivery,
             };
@@ -90,7 +90,7 @@ namespace invetario_api.Modules.provider
             provider.email = data.email;
             provider.mainContact = data.mainContact;
             provider.contactPhone = data.contactPhone;
-            provider.payCondition = data.payCondition;
+            provider.payCondition = data.payCondition.Value;
             provider.typeMoney = data.typeMoney;
             provider.daysDelivery = data.daysDelivery;
             provider.status = data.status!.Value;

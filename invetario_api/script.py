@@ -209,7 +209,7 @@ def updateDatabase(name: str):
     if namespace_index == -1:
         raise Exception("Namespace no encontrado")
 
-    constructor_line = "public Database(DbContextOptions<Database> options): base(options) { }"
+    constructor_line = "public Database(DbContextOptions<Database> options) : base(options) { }"
     constructor_index = content.find(constructor_line)
     if constructor_index == -1:
         raise Exception("Constructor no encontrado")

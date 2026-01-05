@@ -7,6 +7,7 @@ using System.Reflection;
 
 using invetario_api.Modules.store.entity;
 using invetario_api.Modules.provider.entity;
+using invetario_api.Modules.client.entity;
 namespace invetario_api.database
 {
     public class Database : DbContext
@@ -25,6 +26,7 @@ namespace invetario_api.database
 
         public DbSet<Provider> providers { get; set; }
 
+        public DbSet<Client> clients { get; set; }
 
         public Database(DbContextOptions<Database> options) : base(options) { }
 

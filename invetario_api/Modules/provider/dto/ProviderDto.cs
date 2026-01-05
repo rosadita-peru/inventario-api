@@ -38,7 +38,7 @@ namespace invetario_api.Modules.provider.dto
     public string contactPhone { get; set; }
     [Required]
     [EnumDataType(typeof(PayCondition))]
-    public PayCondition payCondition { get; set; }
+    public PayCondition? payCondition { get; set; }
     [Required]
     [MinLength(1)]
     public string typeMoney { get; set; }

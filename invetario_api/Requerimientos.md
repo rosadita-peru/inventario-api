@@ -243,22 +243,19 @@ Te dejo los **requerimientos funcionales completos** de un **Sistema de Inventar
 
 ### RF-15 Gestión de Clientes
 
-- Crear, editar, desactivar clientes
-- Datos básicos (nombre, documento, contacto)
+- Crear, editar, desactivar clientes [X]
+- Datos básicos (nombre, documento, contacto) [X]
 
 | Atributo                    | Tipo de Dato (SQL Server)       | Requerido | Descripción                     |
 | --------------------------- | ------------------------------- | --------- | ------------------------------- |
 | **ClienteId**               | INT IDENTITY / UNIQUEIDENTIFIER | Sí        | Identificador único del cliente |
-| **CodigoCliente**           | VARCHAR(20)                     | Sí        | Código interno del cliente      |
 | **TipoCliente**             | VARCHAR(30)                     | Sí        | Natural / Empresa               |
-| **RazonSocial**             | VARCHAR(150)                    | Sí        | Nombre legal o razón social     |
 | **NombreComercial**         | VARCHAR(150)                    | No        | Nombre comercial                |
 | **TipoDocumento**           | VARCHAR(20)                     | Sí        | DNI, RUC, Pasaporte             |
 | **NumeroDocumento**         | VARCHAR(20)                     | Sí        | Documento fiscal                |
 | **Telefono**                | VARCHAR(30)                     | No        | Teléfono principal              |
 | **Email**                   | VARCHAR(150)                    | No        | Correo principal                |
 | **Activo**                  | BIT                             | Sí        | Cliente activo/inactivo         |
-| **Observaciones**           | VARCHAR(MAX)                    | No        | Notas internas                  |
 | **FechaCreacion**           | DATETIME                        | Sí        | Fecha de registro               |
 | **FechaActualizacion**      | DATETIME                        | No        | Última modificación             |
 | **CreadoPorUsuarioId**      | INT                             | Sí        | Usuario creador                 |
