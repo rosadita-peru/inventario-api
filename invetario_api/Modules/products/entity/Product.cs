@@ -1,4 +1,5 @@
 ﻿using invetario_api.Modules.categories.entity;
+using invetario_api.Modules.entryorder.entity;
 using invetario_api.Modules.unit.entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -47,5 +48,7 @@ namespace invetario_api.Modules.products.entity
         public bool status { get; set; } = false;
 
         public ICollection<ProductStore> productStores { get; set; } = new List<ProductStore>();
+
+        public ICollection<EntryOrderDetail> entryOrderDetails { get; set; } = new List<EntryOrderDetail>();
     }
 }

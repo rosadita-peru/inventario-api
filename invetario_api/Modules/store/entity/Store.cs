@@ -1,3 +1,4 @@
+using invetario_api.Modules.entryorder.entity;
 using invetario_api.Modules.products.entity;
 using invetario_api.Modules.users.entity;
 using System.ComponentModel.DataAnnotations;
@@ -20,8 +21,8 @@ namespace invetario_api.Modules.store.entity
 
         [Required]
         public string address { get; set; }
-    
-    
+
+
         [Required]
         [MaxLength(9)]
         public string phone { get; set; }
@@ -44,5 +45,7 @@ namespace invetario_api.Modules.store.entity
         public string observations { get; set; }
 
         public ICollection<ProductStore> productStores { get; set; } = new List<ProductStore>();
+
+        public ICollection<Entryorder> entryOrders { get; set; } = new List<Entryorder>();
     }
 }

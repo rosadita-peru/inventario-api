@@ -17,4 +17,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modules\entryorder\response\" />
+    <Folder Include="Modules\provider\response\" />
+    <Folder Include="Validations\" />
+  </ItemGroup>
+
 </Project>

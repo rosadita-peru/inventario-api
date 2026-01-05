@@ -2,6 +2,7 @@ using invetario_api.database;
 using invetario_api.Exceptions;
 using invetario_api.Modules.provider.dto;
 using invetario_api.Modules.provider.entity;
+using invetario_api.Modules.provider.response;
 using invetario_api.utils;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -18,12 +19,14 @@ namespace invetario_api.Modules.provider
             _db = db;
         }
 
-        public async Task<List<Provider>> getProviders()
+        public async Task<List<ProviderResponseSingle>> getProviders()
         {
-            return await _db.providers.ToListAsync();
+            var providers = await _db.providers.ToListAsync();
+
+            return ProviderResponseSingle.fromEntityList(providers);
         }
 
-        public async Task<Provider> createProvider(ProviderDto data)
+        public async Task<ProviderResponseSingle> createProvider(ProviderDto data)
         {
             var newProvider = new Provider
             {
@@ -45,10 +48,10 @@ namespace invetario_api.Modules.provider
             _db.providers.Add(newProvider);
             await _db.SaveChangesAsync();
 
-            return newProvider;
+            return ProviderResponseSingle.fromEntity(newProvider);
         }
 
-        public async Task<Provider?> deleteProvider(int providerId)
+        public async Task<ProviderResponseSingle?> deleteProvider(int providerId)
         {
             var provider = await _db.providers.Where(p => p.providerId == providerId).FirstOrDefaultAsync();
             if (provider == null)
@@ -58,10 +61,10 @@ namespace invetario_api.Modules.provider
 
             provider.status = false;
             await _db.SaveChangesAsync();
-            return provider;
+            return ProviderResponseSingle.fromEntity(provider);
         }
 
-        public async Task<Provider?> getProviderById(int providerId)
+        public async Task<ProviderResponseSingle?> getProviderById(int providerId)
         {
             var provider = await _db.providers.Where(p => p.providerId == providerId).FirstOrDefaultAsync();
             if (provider == null)
@@ -69,10 +72,10 @@ namespace invetario_api.Modules.provider
                 throw new HttpException(404, "Provider not found");
             }
 
-            return provider;
+            return ProviderResponseSingle.fromEntity(provider);
         }
 
-        public async Task<Provider?> updateProvider(int providerId, UpdateProviderDto data)
+        public async Task<ProviderResponseSingle?> updateProvider(int providerId, UpdateProviderDto data)
         {
             var provider = await _db.providers.Where(p => p.providerId == providerId).FirstOrDefaultAsync();
             if (provider == null)
@@ -96,7 +99,7 @@ namespace invetario_api.Modules.provider
             provider.status = data.status!.Value;
             await _db.SaveChangesAsync();
 
-            return provider;
+            return ProviderResponseSingle.fromEntity(provider);
         }
     }
 }

@@ -1,3 +1,4 @@
+using invetario_api.Modules.entryorder.entity;
 using invetario_api.Modules.products.entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,5 +26,7 @@ namespace invetario_api.Modules.provider.entity
         public int daysDelivery { get; set; }
         public bool status { get; set; } = true;
         public DateTime createdAt { get; set; } = DateTime.UtcNow;
+
+        public ICollection<Entryorder> entryOrders { get; set; }
     }
 }

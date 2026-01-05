@@ -162,6 +162,42 @@ Te dejo los **requerimientos funcionales completos** de un **Sistema de Inventar
   - Asociar proveedor
   - Registrar múltiples productos por orden
 
+  | Atributo                    | Tipo de Dato (SQL Server)       | Requerido | Descripción                      |
+  | --------------------------- | ------------------------------- | --------- | -------------------------------- |
+  | **CompraId**                | INT IDENTITY / UNIQUEIDENTIFIER | Sí        | Identificador único de la compra |
+  | **ProveedorId**             | INT                             | Sí        | Proveedor asociado               |
+  | **AlmacenId**               | INT                             | Sí        | Almacén destino                  |
+  | **FechaCompra**             | DATETIME                        | Sí        | Fecha del documento              |
+  | **FechaRegistro**           | DATETIME                        | Sí        | Fecha de registro en sistema     |
+  | **TipoDocumento**           | VARCHAR(20)                     | Sí        | Factura, Boleta, Guía            |
+  | **Moneda**                  | VARCHAR(10)                     | Sí        | Moneda de la compra              |
+  | **CondicionPago**           | VARCHAR(50)                     | Sí        | Contado / Crédito                |
+  | **Impuesto**                | DECIMAL(18,2)                   | Sí        | IGV / IVA                        |
+  | **Total**                   | DECIMAL(18,2)                   | Sí        | Total del documento              |
+  | **EstadoCompra**            | VARCHAR(20)                     | Sí        | Pendiente, Confirmada, Anulada   |
+  | **Observaciones**           | VARCHAR(MAX)                    | No        | Comentarios                      |
+  | **FechaActualizacion**      | DATETIME                        | No        | Auditoría                        |
+  | **CreadoPorUsuarioId**      | INT                             | Sí        | Usuario creador                  |
+  | **ActualizadoPorUsuarioId** | INT                             | No        | Usuario editor                   |
+
+### Detalle de la compra
+
+| Atributo                    | Tipo de Dato (SQL Server)       | Requerido | Descripción                     |
+| --------------------------- | ------------------------------- | --------- | ------------------------------- |
+| **CompraDetalleId**         | INT IDENTITY / UNIQUEIDENTIFIER | Sí        | Identificador único del detalle |
+| **CompraId**                | INT                             | Sí        | Referencia a la compra          |
+| **ProductoId**              | INT                             | Sí        | Producto comprado               |
+| **Cantidad**                | DECIMAL(18,4)                   | Sí        | Cantidad comprada               |
+| **CostoUnitario**           | DECIMAL(18,4)                   | Sí        | Precio de compra unitario       |
+| **Subtotal**                | DECIMAL(18,2)                   | Sí        | Cantidad × CostoUnitario        |
+| **Impuesto**                | DECIMAL(18,2)                   | Sí        | IGV / IVA del ítem              |
+| **Total**                   | DECIMAL(18,2)                   | Sí        | Total del ítem                  |
+| **EstadoDetalle**           | VARCHAR(20)                     | Sí        | Pendiente, Recibido, Anulado    |
+| **FechaCreacion**           | DATETIME                        | Sí        | Auditoría                       |
+| **FechaActualizacion**      | DATETIME                        | No        | Auditoría                       |
+| **CreadoPorUsuarioId**      | INT                             | Sí        | Usuario creador                 |
+| **ActualizadoPorUsuarioId** | INT                             | No        | Usuario editor                  |
+
 ---
 
 ### RF-09 Confirmación de Entrada
